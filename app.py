@@ -52,6 +52,11 @@ class App:
                 self.root.iconbitmap(
                     "@./assets/vecteezy_whale-tail-symbol_6720669-1_resized.xbm"
                 )
+                # # Alternatively:
+                # img = tk.PhotoImage(
+                #     file="./assets/vecteezy_whale-tail-symbol_6720669-1_resized.gif"
+                # )
+                # self.root.tk.call("wm", "iconphoto", self.root._w, img)
             except tk._tkinter.TclError as e:
                 print(e)
 
