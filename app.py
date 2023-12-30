@@ -1,7 +1,7 @@
 import random
+import time
 import tkinter as tk
 from tkinter import ttk
-import time
 
 
 class Colours:
@@ -19,7 +19,9 @@ class App:
         # Set window icon
         self.root.geometry("200x200")
         self.root.title("Fate Flipper")
-        self.root.iconbitmap("assets/vecteezy_whale-tail-symbol_6720669-1_resized.ico")
+
+        self._setup_icon()
+
         self.mainframe = tk.Frame(self.root, background=Colours.window_bg)
         self.mainframe.pack(fill="both", expand=True)
         # Center all content
@@ -39,6 +41,19 @@ class App:
 
         self.root.mainloop()
         return
+
+    def _setup_icon(self):
+        try:
+            self.root.iconbitmap(
+                "./assets/vecteezy_whale-tail-symbol_6720669-1_resized.ico"
+            )
+        except tk._tkinter.TclError:
+            try:
+                self.root.iconbitmap(
+                    "@./assets/vecteezy_whale-tail-symbol_6720669-1_resized.xbm"
+                )
+            except tk._tkinter.TclError as e:
+                print(e)
 
     def _setup_label(self):
         self.text = ttk.Label(
