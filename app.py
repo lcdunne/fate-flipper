@@ -27,7 +27,7 @@ class App:
         self.mainframe.rowconfigure(0, weight=1)  # All available V space
         self.mainframe.rowconfigure(1, weight=1)
         # Setup for main app content
-        self.bias = tk.IntVar(value=50)
+        self.threshold = tk.IntVar(value=50)
         self._setup_label()
         self._setup_randomization_btn()
         self._setup_slider()
@@ -60,33 +60,35 @@ class App:
         self.btn_flip.grid(row=1, column=0, pady=10, sticky="ns")
 
     def _setup_slider(self):
-        # Slider to set the bias
-        self.bias_slider = ttk.Scale(
+        # Slider to set the threshold
+        self.threshold_slider = ttk.Scale(
             self.mainframe,
             orient="horizontal",
             from_=0,
             to=100,
-            variable=self.bias,
-            command=lambda _: self.bias_label.config(text=f"{self.bias.get()}%"),
+            variable=self.threshold,
+            command=lambda _: self.threshold_label.config(
+                text=f"{self.threshold.get()}%"
+            ),
         )
 
         # Small label for the slider
-        self.bias_label = ttk.Label(
+        self.threshold_label = ttk.Label(
             self.mainframe,
-            text=f"{self.bias.get()}%",
+            text=f"{self.threshold.get()}%",
             foreground=Colours.text,
             font=("Arial", 12),
         )
 
-        self.bias_slider.grid(row=2, column=0, pady=10, sticky="nsew")
-        self.bias_label.grid(row=3, column=0)
+        self.threshold_slider.grid(row=2, column=0, pady=10, sticky="nsew")
+        self.threshold_label.grid(row=3, column=0)
 
     def set_flip_value(self, y=None):
-        y = y or self.bias.get() / 100
+        y = y or self.threshold.get() / 100
         self.text.config(
             text=f"{y:.0%}",
             background=Colours.danger
-            if y >= self.bias.get() / 100
+            if y >= self.threshold.get() / 100
             else Colours.success,
         )
 
