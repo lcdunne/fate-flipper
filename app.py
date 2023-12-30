@@ -23,6 +23,8 @@ class App:
         self.mainframe = tk.Frame(self.root, background=Colours.window_bg)
         self.mainframe.pack(fill="both", expand=True)
 
+        self.bias = tk.IntVar(value=50)
+
         self.text = ttk.Label(
             self.mainframe,
             text="",
@@ -53,13 +55,33 @@ class App:
             "TButton", font=("Arial", 12), padding=(10, 5), foreground=Colours.text
         )
 
+        self.bias_slider = ttk.Scale(
+            self.mainframe,
+            orient="horizontal",
+            from_=0,
+            to=100,
+            variable=self.bias,
+            command=lambda _: self.bias_label.config(text=f"{self.bias.get()}%"),
+        )
+        self.bias_slider.grid(row=2, column=0, pady=10, sticky="nsew")
+
+        # Small label for the slider
+        self.bias_label = ttk.Label(
+            self.mainframe,
+            text=f"{self.bias.get()}%",
+            foreground=Colours.text,
+            font=("Arial", 12),
+        )
+        self.bias_label.grid(row=3, column=0)
+
         self.root.mainloop()
         return
 
     def flip(self):
         y = random.random()
         self.text.config(
-            text=f"{y:.0%}", background="#BF616A" if y >= 0.5 else "#8FBCBB"
+            text=f"{y:.0%}",
+            background="#BF616A" if y >= self.bias.get() / 100 else "#8FBCBB",
         )
 
 
