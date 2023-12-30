@@ -17,7 +17,7 @@ class App:
         self.root = tk.Tk()
 
         # Set window icon
-        self.root.geometry("400x200")
+        self.root.geometry("200x200")
         self.root.title("Fate Flipper")
         self.root.iconbitmap("assets/vecteezy_whale-tail-symbol_6720669-1_resized.ico")
         self.mainframe = tk.Frame(self.root, background=Colours.window_bg)
@@ -30,12 +30,12 @@ class App:
         self.bias = tk.IntVar(value=50)
         self._setup_label()
         self._setup_randomization_btn()
+        self._setup_slider()
 
         style = ttk.Style()
         style.configure(
             "TButton", font=("Arial", 12), padding=(10, 5), foreground=Colours.text
         )
-        self._setup_slider()
 
         self.root.mainloop()
         return
