@@ -15,7 +15,7 @@ class App:
         self.root = tk.Tk()
 
         # Set window icon
-        self.root.geometry("350x200")
+        self.root.geometry("400x200")
         self.root.title("Fate Flipper")
         self.root.iconbitmap("assets/vecteezy_whale-tail-symbol_6720669-1_resized.ico")
 
@@ -25,12 +25,14 @@ class App:
 
         self.text = ttk.Label(
             self.mainframe,
-            text="Flip for fate",
+            text="",
             # background="Colo",
             foreground=Colours.text,
             font=("Arial", 26),
         )
         self.text.grid(row=0, column=0, columnspan=2, pady=10)
+        self.flip()
+
         self.btn_flip = ttk.Button(
             self.mainframe,
             text="go",
@@ -55,7 +57,10 @@ class App:
         return
 
     def flip(self):
-        self.text.config(text=f"{random.random():.0%}")
+        y = random.random()
+        self.text.config(
+            text=f"{y:.0%}", background="#BF616A" if y >= 0.5 else "#8FBCBB"
+        )
 
 
 if __name__ == "__main__":
